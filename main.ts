@@ -7,6 +7,11 @@ input.onButtonPressed(Button.A, function () {
 input.onButtonPressed(Button.AB, function () {
     radio.sendValue("icon", icon)
 })
+radio.onReceivedString(function (receivedString) {
+    music.setVolume(212)
+    music.playSoundEffect(music.createSoundEffect(WaveShape.Triangle, 5000, 3767, 255, 20, 500, SoundExpressionEffect.Vibrato, InterpolationCurve.Linear), SoundExpressionPlayMode.UntilDone)
+    basic.showString(receivedString)
+})
 input.onButtonPressed(Button.B, function () {
     if (icon < icons.length - 1) {
         icon = icon + 1
@@ -20,6 +25,9 @@ radio.onReceivedValue(function (name, value) {
         basic.showIcon(icons[value])
 icon = value
     }
+})
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    radio.sendString("Test")
 })
 let icons: number[] = []
 let icon = 0
